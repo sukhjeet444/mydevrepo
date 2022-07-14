@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Files",
+				"name": "Get Files metada",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -46,7 +46,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Get Files",
+						"activity": "Get Files metada",
 						"dependencyConditions": [
 							"Succeeded"
 						]
