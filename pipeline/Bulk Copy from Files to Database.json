@@ -1,0 +1,136 @@
+{
+	"name": "Bulk Copy from Files to Database",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Files",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "GetMetadataDataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"SourceContainer": {
+								"value": "@pipeline().parameters.SourceContainer",
+								"type": "Expression"
+							},
+							"SourceDirectory": {
+								"value": "@pipeline().parameters.SourceDirectory",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "ForEachFile",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Get Files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get Files').output.childItems",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "CopyFiles",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset1",
+									"type": "DatasetReference",
+									"parameters": {
+										"fileName": {
+											"value": "@item().name",
+											"type": "Expression"
+										},
+										"SourceContainer": {
+											"value": "@pipeline().parameters.SourceContainer",
+											"type": "Expression"
+										},
+										"SourceDirectory": {
+											"value": "@pipeline().parameters.SourceDirectory",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AzureSqlTableUsingKeyVault",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"SourceContainer": {
+				"type": "string",
+				"defaultValue": "mydata"
+			},
+			"SourceDirectory": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-07-04T18:38:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

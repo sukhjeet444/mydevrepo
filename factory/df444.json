@@ -1,0 +1,9 @@
+{
+	"name": "df444",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "38c67f14-bb24-446a-9723-4540f19b1d6e",
+		"tenantId": "18ed93f5-e470-4996-b0ef-9554af985d50"
+	}
+}

@@ -1,0 +1,55 @@
+{
+	"name": "AzureSqlTableUsingKeyVault",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseUsingKeyVault",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ProductKey",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ProductAlternateKey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EnglishProductName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SpanishProductName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Color",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SafetyStockLevel",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "ReorderPoint",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "StartDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DimProduct"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
