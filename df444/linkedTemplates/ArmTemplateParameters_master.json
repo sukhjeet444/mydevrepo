@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "df444"
+		},
+		"MyAzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureBlobStorageUsingKeyVault_properties_typeProperties_connectionString_secretName": {
+			"value": "azurestorageaccount"
+		},
+		"AzureSqlDatabaseUsingKeyVault_properties_typeProperties_connectionString_secretName": {
+			"value": "sqladmin"
+		},
+		"MyAzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://mysa444.dfs.core.windows.net/"
+		},
+		"MyAzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://mykv444.vault.azure.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
