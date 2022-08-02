@@ -15,6 +15,10 @@
 			"type": "string",
 			"defaultValue": "azurestorageaccount"
 		},
+		"AzureSqlDatabase1_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "sqladmin"
+		},
 		"AzureSqlDatabaseUsingKeyVault_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "sqladmin"
@@ -65,6 +69,9 @@
 					},
 					"AzureBlobStorageUsingKeyVault_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('AzureBlobStorageUsingKeyVault_properties_typeProperties_connectionString_secretName')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_connectionString_secretName')]"
 					},
 					"AzureSqlDatabaseUsingKeyVault_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('AzureSqlDatabaseUsingKeyVault_properties_typeProperties_connectionString_secretName')]"

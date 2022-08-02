@@ -11,6 +11,9 @@
 		"AzureBlobStorageUsingKeyVault_properties_typeProperties_connectionString_secretName": {
 			"value": "azurestorageaccount"
 		},
+		"AzureSqlDatabase1_properties_typeProperties_connectionString_secretName": {
+			"value": "sqladmin"
+		},
 		"AzureSqlDatabaseUsingKeyVault_properties_typeProperties_connectionString_secretName": {
 			"value": "sqladmin"
 		},
