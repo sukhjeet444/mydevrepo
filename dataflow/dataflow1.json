@@ -89,20 +89,12 @@
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",
-				"     upsertable:true,",
-				"     keys:['PrimryGenre','year'],",
+				"     upsertable:false,",
+				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
-				"     mapColumn(",
-				"          PrimryGenre,",
-				"          year,",
-				"          AverageRatings,",
-				"          HighestRated,",
-				"          LowestRated,",
-				"          NumberofMovies",
-				"     )) ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
