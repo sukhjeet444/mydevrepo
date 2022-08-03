@@ -826,6 +826,14 @@
 						"aggregate1 alterRow(updateIf(true())) ~> alterRow1",
 						"alterRow1 sink(allowSchemaDrift: false,",
 						"     validateSchema: false,",
+						"     input(",
+						"          PrimryGenre as string,",
+						"          year as string,",
+						"          AverageRatings as double,",
+						"          HighestRated as string,",
+						"          LowestRated as string,",
+						"          NumberofMovies as long",
+						"     ),",
 						"     format: 'table',",
 						"     store: 'sqlserver',",
 						"     schemaName: 'dbo',",
@@ -836,7 +844,15 @@
 						"     upsertable: false,",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          PrimryGenre,",
+						"          year,",
+						"          AverageRatings,",
+						"          HighestRated,",
+						"          LowestRated,",
+						"          NumberofMovies",
+						"     )) ~> sink1"
 					]
 				}
 			},
