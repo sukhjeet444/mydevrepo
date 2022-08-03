@@ -77,7 +77,7 @@
 				"          NumberofMovies = count()) ~> aggregate1",
 				"aggregate1 alterRow(updateIf(true())) ~> alterRow1",
 				"alterRow1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
+				"     validateSchema: true,",
 				"     input(",
 				"          PrimryGenre as string,",
 				"          year as string,",
@@ -94,7 +94,15 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PrimryGenre,",
+				"          year,",
+				"          AverageRatings,",
+				"          HighestRated,",
+				"          LowestRated,",
+				"          NumberofMovies",
+				"     )) ~> sink1"
 			]
 		}
 	}
