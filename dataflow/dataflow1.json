@@ -36,9 +36,6 @@
 				},
 				{
 					"name": "aggregate1"
-				},
-				{
-					"name": "alterRow1"
 				}
 			],
 			"scriptLines": [
@@ -75,8 +72,7 @@
 				"          HighestRated = first(title),",
 				"          LowestRated = last(title),",
 				"          NumberofMovies = count()) ~> aggregate1",
-				"aggregate1 alterRow(updateIf(true())) ~> alterRow1",
-				"alterRow1 sink(allowSchemaDrift: false,",
+				"aggregate1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
 				"          PrimryGenre as string,",
