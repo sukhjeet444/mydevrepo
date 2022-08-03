@@ -387,7 +387,8 @@
 								"datasetParameters": {
 									"source1": {},
 									"sink1": {}
-								}
+								},
+								"linkedServiceParameters": {}
 							},
 							"staging": {},
 							"compute": {
@@ -443,7 +444,34 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
+				"schema": [
+					{
+						"name": "PrimryGenre",
+						"type": "nvarchar"
+					},
+					{
+						"name": "year",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AverageRatings",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "HighestRated",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LowestRated",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NumberofMovies",
+						"type": "bigint",
+						"precision": 19
+					}
+				],
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Ratings"
@@ -845,15 +873,32 @@
 						"          NumberofMovies = count()) ~> aggregate1",
 						"aggregate1 alterRow(updateIf(true())) ~> alterRow1",
 						"alterRow1 sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
+						"     validateSchema: true,",
+						"     input(",
+						"          PrimryGenre as string,",
+						"          year as string,",
+						"          AverageRatings as double,",
+						"          HighestRated as string,",
+						"          LowestRated as string,",
+						"          NumberofMovies as long",
+						"     ),",
 						"     deletable:false,",
 						"     insertable:true,",
 						"     updateable:false,",
-						"     upsertable:false,",
+						"     upsertable:true,",
+						"     keys:['PrimryGenre','year'],",
 						"     format: 'table',",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          PrimryGenre,",
+						"          year,",
+						"          AverageRatings,",
+						"          HighestRated,",
+						"          LowestRated,",
+						"          NumberofMovies",
+						"     )) ~> sink1"
 					]
 				}
 			},
