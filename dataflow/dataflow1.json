@@ -14,9 +14,9 @@
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "AzureSqlTable1",
-						"type": "DatasetReference"
+					"linkedService": {
+						"referenceName": "AzureSqlDatabase1",
+						"type": "LinkedServiceReference"
 					},
 					"name": "sink1"
 				}
@@ -76,22 +76,16 @@
 				"          LowestRated = last(title),",
 				"          NumberofMovies = count()) ~> aggregate1",
 				"aggregate1 alterRow(updateIf(true())) ~> alterRow1",
-				"alterRow1 sink(allowSchemaDrift: true,",
-				"     validateSchema: true,",
-				"     input(",
-				"          PrimryGenre as string,",
-				"          year as string,",
-				"          AverageRatings as double,",
-				"          HighestRated as string,",
-				"          LowestRated as string,",
-				"          NumberofMovies as long",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     recreate:true,",
+				"alterRow1 sink(allowSchemaDrift: false,",
+				"     validateSchema: false,",
 				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'dbo',",
+				"     tableName: 'NewRatings',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
